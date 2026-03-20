@@ -16,7 +16,7 @@ def index():
     return render_template('index.html', lista_categorie = lista_categorie)
 
 @bp.route('/categoria/<id>')
-def categoria_by_id(id):
+def categoria(id):
     categoria = categoria_repository.get_category_by_id(id)
     prodotti = product_repository.get_prodotto_category_by_id(categoria['id'])
 

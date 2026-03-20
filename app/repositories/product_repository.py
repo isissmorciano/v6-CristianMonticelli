@@ -23,12 +23,12 @@ def get_all_products():
     prodotti = db.execute(query).fetchall()
     return [dict(prodotto) for prodotto in prodotti]
 
-def create_product(category_id, nome, prezzo) -> None:
+def create_product(categoria_id, nome, prezzo) -> None:
     db = get_db()
     query = '''
-            INSERT INTO prodotti (category_id, nome, prezzo)
+            INSERT INTO prodotti (categoria_id, nome, prezzo)
             VALUES (?,?,?)'''
-    cursor = db.execute(query, (category_id, nome, prezzo,))
+    cursor = db.execute(query, (categoria_id, nome, prezzo,))
     db.commit()
     return cursor.lastrowid
 
@@ -36,7 +36,7 @@ def get_prodotto_category_by_id(category_id):
     db = get_db()
     query = '''
             SELECT *
-            FROM prodotto 
+            FROM prodotti
             WHERE categoria_id=?'''
     print("--------------------------------------------------------")
     print(query)
