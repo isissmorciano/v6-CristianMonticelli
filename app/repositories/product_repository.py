@@ -59,3 +59,14 @@ def get_product_by_id(product_id):
         return dict(prodotto)
     return None
 
+def find_products_by_name(search_term):
+    db = get_db()
+    query = '''
+    SELECT * 
+    FROM prodotti 
+    join categorie
+    on prodotti.categoria_id = categorie.id
+    where prodotti.nome LIKE ? 
+    '''
+    risultati = db.execute(query, (f'%{search_term}%',)).fetchall()
+    return [dict(r) for r in risultati]

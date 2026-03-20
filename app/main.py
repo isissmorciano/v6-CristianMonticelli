@@ -20,24 +20,18 @@ def categoria_by_id(id):
     categoria = categoria_repository.get_category_by_id(id)
     prodotti = product_repository.get_prodotto_category_by_id(categoria['id'])
 
-    return render_template('partite_gioco.html',categoria=categoria,prodotti=prodotti)
+    return render_template('categoria_detail.html',categoria=categoria,prodotti=prodotti)
 
 @bp.route("/crea_categoria", methods=("GET", "POST"))
 def crea_categoria():
     if request.method == "POST":
         nome = request.form["nome"]
-        
-        if not nome:
-            error = "Il nome è obbligatorio."
     
-        if error is not None:
-            flash(error)
-        else:
-            # Creiamo il canale
-            categoria_repository.create_category(nome)
-            return redirect(url_for("main.index"))
+        # Creiamo il canale
+        categoria_repository.create_category(nome)
+        return redirect(url_for("main.index"))
         
-    return render_template('create_gioco.html')
+    return render_template('create_categoria.html')
 
 @bp.route("/crea_prodotto", methods=("GET", "POST"))
 def crea_prodotto():
@@ -46,16 +40,23 @@ def crea_prodotto():
         nome = request.form["nome"]
         prezzo = request.form["prezzo"]
         
-        if not nome:
-            error = "Il nome è obbligatorio."
-    
-        if error is not None:
-            flash(error)
-        else:
-            categoria_id = categoria_repository.get_category_by_name(categoria_nome)
-            product_repository.create_product(categoria_id["id"],nome,prezzo)
-            return redirect(url_for("main.index"))
+ 
+        categoria_id = categoria_repository.get_category_by_name(categoria_nome)["id"]
+        print("ffffffffffffffff")
+        print(categoria_id)
+        product_repository.create_product(categoria_id,nome,prezzo)
+        return redirect(url_for("main.index"))
         
-    return render_template('create_gioco.html')
+    return render_template('create_prodotto.html')
 
   
+@bp.route('/ricerca',methods=("GET", "POST"))
+def ricerca():
+    if request.method == "POST":
+        nome = request.form["nome"]
+        prodotti = product_repository.find_products_by_name(nome)
+        print(prodotti)
+        return render_template("ricerca.html",prodotti = prodotti)
+   
+
+    return render_template('ricerca.html')

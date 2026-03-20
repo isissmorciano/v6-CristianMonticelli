@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>ricerca</h1>
+<form method="post">
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" required>
+    <input class=crea type="submit" value="Crea">
+</form>
+    {%if prodotti%}
+        {% for prodotto in prodotti %}
+        <article>
+            <header>
+            <p>nome prodotto: {{ prodotto['nome']}}</p>
+            <p>prezzo: {{ prodotto['prezzo']}}</p>
+            </header>
+        </article>
+        <hr>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
