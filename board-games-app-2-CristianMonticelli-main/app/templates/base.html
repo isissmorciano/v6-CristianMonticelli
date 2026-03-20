@@ -1,0 +1,39 @@
+<!-- app/templates/base.html -->
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <!-- Qui potremmo linkare un CSS -->
+    <style>
+        body {  background-color: lightblue;font-family:color: red, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        hr { border: 0; border-top: 1px solid #000000ff; }
+        nav { background-color: blue; padding: 10px; border-radius: 10px; }
+        p, footer { color: black; }
+        .elimina { background: red }
+        .crea { background: green }
+        .intestazione {background-color: blue}
+        .link {text-decoration: none; color: white;background-color: blue; padding: 10px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Zona Messaggi Flash -->
+    {% for message in get_flashed_messages() %}
+        <div class="flash" style="color: red; border: 1px solid red; padding: 10px;">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <nav>
+        <a href="{{ url_for('main.index') }}"><button class=intestazione>Home</button></a>
+        <a href="{{ url_for('main.create_gioco') }}"><button class=intestazione>Crea gioco</button></a>
+
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <hr>
+    <footer>
+        <small>&copy; 2024 - gioco</small>
+    </footer>
+</body>
+</html>

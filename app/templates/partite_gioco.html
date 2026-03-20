@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ categoria['nome']}}</h1>
+  {% for prodotto in prodotti %}
+  <article>
+    <header>
+      <p>nome prodotto: {{ prodotto['nome']}}</p>
+      <p>prezzo: {{ prodotto['prezzo']}}</p>
+    </header>
+  </article>
+  <hr>
+  {% endfor %}
+{% endblock %}

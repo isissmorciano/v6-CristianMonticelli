@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>cate disponibili</h1>
+  {% for categoria in lista_categorie %}
+  <article>
+    <header>
+      <h2><a href="{{ url_for('main.partite_categoria', id=categoria['id']) }}" class=link>{{ categoria['nome']}}<a></h2>
+    </header>
+  </article>
+  <hr>
+  {% endfor %}
+{% endblock %}

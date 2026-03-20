@@ -1,0 +1,38 @@
+@startuml es7
+class MaterialeBiblioteca{
+    + titolo : str
+    + anno_pubblicazione : int
+    + disponibile : boolean 
+    + prestito (disponibile : False)
+    + restituisce (disponibile : True)
+    + get_titolo (self)
+    + is_disponibile (self)
+    + ricerca (materiali, titolo)
+}
+
+class Libro{
+    + autore : str
+    + n_pagine : int
+    + get_autore (self)
+    + get_n_pagine (self)
+}
+
+
+class Rivista{
+    + n_edizione : int
+    + mese_pubblicazione : int
+    + get_numero_edizione (self)
+    + get_mese_pubblicazione (self)
+}
+
+class DVD{
+    + regista : str
+    + durata : int
+    + get_regista (self)
+    + get_durata (self)
+}
+
+MaterialeBiblioteca <|-- Libro
+MaterialeBiblioteca <|-- DVD
+MaterialeBiblioteca <|-- Rivista
+@enduml

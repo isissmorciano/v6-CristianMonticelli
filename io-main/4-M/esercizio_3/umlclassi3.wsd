@@ -1,0 +1,10 @@
+@startuml es3
+class Veicolo{
+    -numero_veicoli:0
+    +marca : marca
+    +tipo : tipo
+    
+    +get_numero_veicoli(cls):
+        
+}
+@enduml
